@@ -1,0 +1,35 @@
+{
+	"schemaVersion": 1,
+	"id": "no-fire-overlay",
+	"version": "${version}",
+	"name": "No Fire Overlay",
+	"description": "A very, very simple mod to disable fire overlay when you're on fire",
+	"authors": [
+		"b-null"
+	],
+	"contact": {
+	},
+	"license": "CC0-1.0",
+	"icon": "assets/no-fire-overlay/icon.png",
+	"environment": "*",
+	"entrypoints": {
+		"main": [
+			"vvbj.modding.no_fire_overlay.NoFireOverlay"
+		],
+		"client" : [
+			"vvbj.modding.no_fire_overlay.NoFireOverlayClient"
+		]
+	},
+	"mixins": [
+		"no-fire-overlay.mixins.json"
+	],
+	"depends": {
+		"fabricloader": ">=0.16.14",
+		"minecraft": "~1.20.1",
+		"java": ">=17",
+		"fabric-api": "*"
+	},
+	"suggests": {
+		"another-mod": "*"
+	}
+}
