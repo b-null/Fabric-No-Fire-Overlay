@@ -8,7 +8,7 @@ import net.minecraft.util.Identifier;
 
 public class NoFireOverlayClient implements ClientModInitializer {
 
-    private static final Identifier FIRE_TEXTURE = new Identifier(NoFireOverlay.MOD_ID, "fire.png");
+    private static final Identifier FIRE_TEXTURE = Identifier.of(NoFireOverlay.MOD_ID, "fire.png");
 
     private static int counter = 0;
 
