@@ -8,8 +8,9 @@
 		"b-null"
 	],
 	"contact": {
+		"sources": "https://github.com/b-null/Fabric-No-Fire-Overlay"
 	},
-	"license": "CC0-1.0",
+	"license": "MIT",
 	"icon": "assets/no-fire-overlay/icon.png",
 	"environment": "*",
 	"entrypoints": {
