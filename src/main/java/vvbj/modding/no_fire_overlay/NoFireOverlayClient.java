@@ -16,7 +16,7 @@ public class NoFireOverlayClient implements ClientModInitializer {
     public void onInitializeClient() {
         HudRenderCallback.EVENT.register((drawContext, delta) -> {
             MinecraftClient client = MinecraftClient.getInstance();
-            if(client.player != null && client.player.isOnFire() && client.options.getPerspective().isFirstPerson()) {
+            if(client.player != null && client.player.isOnFire() && !client.options.hudHidden && client.options.getPerspective().isFirstPerson()) {
                 int centerX = drawContext.getScaledWindowWidth() / 2;
                 int centerY = drawContext.getScaledWindowHeight() / 2;
 
