@@ -4,6 +4,7 @@ import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientTickEvents;
 import net.fabricmc.fabric.api.client.rendering.v1.HudRenderCallback;
 import net.minecraft.client.MinecraftClient;
+import net.minecraft.client.render.RenderLayer;
 import net.minecraft.util.Identifier;
 
 public class NoFireOverlayClient implements ClientModInitializer {
@@ -20,10 +21,10 @@ public class NoFireOverlayClient implements ClientModInitializer {
                 int centerX = drawContext.getScaledWindowWidth() / 2;
                 int centerY = drawContext.getScaledWindowHeight() / 2;
 
-                float u = 0;
-                float v = 16 * counter;
+                int u = 0;
+                int v = 16 * counter;
 
-                drawContext.drawTexture(FIRE_TEXTURE, centerX + 8, centerY - 2, 4, 4, u, v, 16, 16, 16, 512);
+                drawContext.drawTexture(RenderLayer::getGuiTextured, FIRE_TEXTURE, centerX + 8, centerY - 2, u, v, 4, 4, 16, 16, 16, 512);
             }
         });
 
