@@ -1,11 +1,13 @@
 package vvbj.modding.no_fire_overlay;
 
-import me.shedaniel.autoconfig.AutoConfig;
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientTickEvents;
+import net.fabricmc.fabric.api.client.networking.v1.ClientPlayConnectionEvents;
+import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
 import net.fabricmc.fabric.api.client.rendering.v1.HudRenderCallback;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.util.Identifier;
+import vvbj.modding.no_fire_overlay.config.ConfigHandler;
 import vvbj.modding.no_fire_overlay.config.ModConfig;
 
 public class NoFireOverlayClient implements ClientModInitializer {
@@ -19,20 +21,19 @@ public class NoFireOverlayClient implements ClientModInitializer {
     public void onInitializeClient() {
         HudRenderCallback.EVENT.register((drawContext, delta) -> {
             if(config == null)
-                config = AutoConfig.getConfigHolder(ModConfig.class).getConfig();
+                config = ConfigHandler.config;
             if(!config.enabled) return;
             MinecraftClient client = MinecraftClient.getInstance();
             if(config.mode == ModConfig.OverlayMode.HIDE && config.showCrosshairFireIcon && client.player != null && client.player.isOnFire() && !client.options.hudHidden && client.options.getPerspective().isFirstPerson()) {
-                float scale = config.fireIconSize / 10f;
 
                 int centerX = drawContext.getScaledWindowWidth() / 2;
                 int centerY = drawContext.getScaledWindowHeight() / 2;
 
-                float offset = (4 * scale - 4) / 2;
+                float offset = (4 * config.fireIconSize - 4) / 2;
 
                 drawContext.getMatrices().push();
-                drawContext.getMatrices().translate(centerX + 8 + (int)scale - offset,centerY - 2 - offset,0);
-                drawContext.getMatrices().scale(scale, scale, 1);
+                drawContext.getMatrices().translate(centerX + 8 + (int)config.fireIconSize - offset,centerY - 2 - offset,0);
+                drawContext.getMatrices().scale(config.fireIconSize, config.fireIconSize, 1);
 
                 float u = 0;
                 float v = 16 * counter;
@@ -52,6 +53,10 @@ public class NoFireOverlayClient implements ClientModInitializer {
                 }else
                     counter = 0;
             }
+        });
+
+        ClientPlayConnectionEvents.JOIN.register((clientPlayNetworkHandler, packetSender, minecraftClient) -> {
+            ConfigHandler.loadConfig(); // Refresh
         });
     }
 }
