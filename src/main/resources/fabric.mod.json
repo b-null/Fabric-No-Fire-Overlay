@@ -19,6 +19,9 @@
 		],
 		"client" : [
 			"vvbj.modding.no_fire_overlay.NoFireOverlayClient"
+		],
+		"modmenu": [
+			"vvbj.modding.no_fire_overlay.config.ConfigScreen"
 		]
 	},
 	"mixins": [
