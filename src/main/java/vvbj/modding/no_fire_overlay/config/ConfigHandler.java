@@ -18,7 +18,7 @@ import java.nio.file.Path;
 @Environment(EnvType.CLIENT)
 public class ConfigHandler {
 
-    private static final Gson GSON = new GsonBuilder().setPrettyPrinting().create();
+    private static final Gson GSON = new GsonBuilder().disableHtmlEscaping().setPrettyPrinting().create();
     private static final Path CONFIG_PATH = FabricLoader.getInstance().getConfigDir().resolve("no-fire-overlay.json");
 
     public static ModConfig config = new ModConfig();
@@ -35,7 +35,9 @@ public class ConfigHandler {
                 saveConfig(); // Write default
             }
         } catch (IOException e) {
-            NoFireOverlay.LOGGER.error("Error loading config from path: {}", e.getMessage());
+            NoFireOverlay.LOGGER.error("Error loading config from path: {}. Attempting to re-create it", e.getMessage());
+            config.reset();
+            saveConfig();
         }
     }
 
