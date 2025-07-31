@@ -34,7 +34,7 @@ public abstract class InGameOverlayRendererMixin {
             float i = sprite.getMinV();
             float j = sprite.getMaxV();
             float k = (i + j) / 2.0F;
-            float l = sprite.getAnimationFrameDelta();
+            float l = sprite.getUvScaleDelta();
             float m = MathHelper.lerp(l, f, h);
             float n = MathHelper.lerp(l, g, h);
             float o = MathHelper.lerp(l, i, k);
