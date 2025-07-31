@@ -4,6 +4,7 @@ import net.fabricmc.api.ModInitializer;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import vvbj.modding.no_fire_overlay.config.ConfigHandler;
 
 public class NoFireOverlay implements ModInitializer {
 	public static final String MOD_ID = "no-fire-overlay";
@@ -12,5 +13,6 @@ public class NoFireOverlay implements ModInitializer {
 	@Override
 	public void onInitialize() {
 		LOGGER.info("No Fire overlay loaded. Say bye bye to that annoying fire!");
+		ConfigHandler.loadConfig();
 	}
 }
